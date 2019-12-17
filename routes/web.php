@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Route::get('/', 'GachaController@start');
 
-Route::get('/gacha', 'GachaController@gachaSingle');
+Route::get('/gachaSingle', 'GachaController@gachaSingle');
+
+Route::get('/gachaMultiple', 'GachaController@gachaMultiple');
