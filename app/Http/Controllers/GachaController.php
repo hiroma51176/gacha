@@ -6,10 +6,19 @@ use Illuminate\Http\Request;
 
 class GachaController extends Controller
 {
-    public function gacha()
+    public function start()
     {
-        $gacha = rand(1, 100);
-        if($gacha = 1){
+        $result = null;
+        $gacha = "";
+        return view('layouts.front', ['result' => $result, 'gacha' => $gacha]);
+    }
+    
+    
+    
+    public function gachaSingle()
+    {
+        $gacha = mt_rand(1, 100);
+        if($gacha == 1){
             $result = "大当たりを引きました";
         }elseif($gacha <= 10){
             $result = "当たりを引きました";
@@ -17,6 +26,6 @@ class GachaController extends Controller
             $result = "はずれを引きました";
         }
         
-        return view('result', ['result' => $result]);
+        return view('layouts.front', ['result' => $result, 'gacha' => $gacha]);
     }
 }

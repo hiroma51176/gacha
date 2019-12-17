@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', 'GachaController@start');
+
+Route::get('/gacha', 'GachaController@gachaSingle');
