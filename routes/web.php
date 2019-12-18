@@ -20,3 +20,6 @@ Route::get('/', 'GachaController@start');
 Route::get('/gachaSingle', 'GachaController@gachaSingle');
 
 Route::get('/gachaMultiple', 'GachaController@gachaMultiple');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
