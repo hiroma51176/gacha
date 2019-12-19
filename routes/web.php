@@ -18,8 +18,14 @@ Route::get('/', function () {
 Route::get('/', 'GachaController@start');
 
 Route::get('/gachaSingle', 'GachaController@gachaSingle');
-
 Route::get('/gachaMultiple', 'GachaController@gachaMultiple');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+    Route::get('prize/create', 'Admin\PrizeController@add');
+    Route::post('prize/create', 'Admin\PrizeController@create');
+});
+    

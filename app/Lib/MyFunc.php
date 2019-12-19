@@ -2,6 +2,8 @@
 
 namespace App\Lib;
 
+use App\Prize;
+
 class MyFunc
 {
     // ピックアップを決める関数
@@ -9,6 +11,8 @@ class MyFunc
     {
         $timestamp = time();
         $day = date('j', $timestamp);
+        
+        //$miss = Prize::where('id', 1)->first();
         
         // ピックアップ
         if($day % 2 == 0){
@@ -22,7 +26,8 @@ class MyFunc
         // 当たりの中身
         $hit = array('AA', 'BB', 'CC', 'DD', 'EE');
         
-        return array("pickup" => $pickup, "jackpot" => $jackpot, "hit" => $hit);
+        $array = array("pickup" => $pickup, "jackpot" => $jackpot, "hit" => $hit);
+        return $array;
     }
     
     //ガチャを１回引く関数
@@ -33,6 +38,7 @@ class MyFunc
         $pickup = $array['pickup'];
         $jackpot = $array['jackpot'];
         $hit = $array['hit'];
+        //$miss = $array['miss'];
         
         // ガチャを実行
         $gacha = mt_rand(1, 100);
@@ -40,21 +46,19 @@ class MyFunc
         // 大当たりの場合
         if($gacha == 1){
             $rand_key = array_rand($jackpot, 1);
-            $result = "大当たり--" . $jackpot[$rand_key];
+            $result = "大当たり  " . $jackpot[$rand_key];
             
         // 当たりの場合
         }elseif($gacha <= 20){
             $rand_key = array_rand($hit, 1);
-            $result = "当たり--" . $hit[$rand_key];
+            $result = "当たり  " . $hit[$rand_key];
             
         //はずれの場合
         }else{
             $result = "はずれ";
         }
-        $array = array("gacha" => $gacha, "result" => $result, "pickup" => $pickup, "jackpot" => $jackpot);
+        $array = array("gacha" => $gacha, "result" => $result, "pickup" => $pickup, "jackpot" => $jackpot, "hit" =>$hit);
         return $array;
     }
-    
-    
     
 }

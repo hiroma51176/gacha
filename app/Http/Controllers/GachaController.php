@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Lib\MyFunc;
 
+use App\Prize;
+use App\Rarity;
+
 class GachaController extends Controller
 {
     public function start()
@@ -49,10 +52,11 @@ class GachaController extends Controller
         
         $pickup = $array['pickup'];
         $jackpot = $array['jackpot'];
+        $hit = $array['hit'];
         $result = null;
         
         // 最低保証機能
-        // ガチャ結果の配列$result_totalに「大当たり」か「当たり」があればtrueを返す
+        // ガチャ結果の配列$result_totalに「当たり」の単語があればtrueを返す
         if(preg_grep("/当たり/", $result_total)){
             
             return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup]);
@@ -62,14 +66,15 @@ class GachaController extends Controller
             
             if($gacha == 1){
                 $rand_key = array_rand($jackpot, 1);
-                $result_add = "大当たり--" . $jackpot[$rand_key];
+                $result_add = "大当たり  " . $jackpot[$rand_key];
             
             }else{
                 $rand_key = array_rand($hit, 1);
-                $result_add = "当たり--" . $hit[$rand_key];
+                $result_add = "当たり " . $hit[$rand_key];
             }
             $result_total[] = $result_add;
         }
+        
         
         return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup]);
     }
