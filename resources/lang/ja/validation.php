@@ -147,6 +147,7 @@ return [
 
     'attributes' => [
         'prize_name' => '景品名',
+        'rarity_id' => 'レアリティ',
         'rarity' => 'レアリティ'
         ],
 

@@ -9,7 +9,7 @@ class Rarity extends Model
     protected $guarded = array('id');
     
     public static $rules = array(
-        'rarity' => 'required',
+        'rarity_name' => 'required',
         );
         
     public function prizes()

@@ -15,7 +15,7 @@ class CreateRaritiesTable extends Migration
     {
         Schema::create('rarities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('rarity');
+            $table->string('rarity_name');
             $table->timestamps();
         });
     }

@@ -27,5 +27,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::get('prize/create', 'Admin\PrizeController@add');
     Route::post('prize/create', 'Admin\PrizeController@create');
+    
+    Route::get('prize/edit', 'Admin\PrizeController@edit');
+    Route::post('prize/edit', 'Admin\PrizeController@update');
+    
+    Route::get('prize/index', 'Admin\PrizeController@index');
+    
+    Route::get('rarity/create', 'Admin\PrizeController@addRarity');
+    Route::post('rarity/create', 'Admin\PrizeController@createRarity');
+    
 });
     

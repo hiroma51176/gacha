@@ -13,4 +13,9 @@ class Prize extends Model
         'prize_name' => 'required',
         'rarity_id' => 'required',
         );
+        
+    public function rarity()
+    {
+        return $this->belongsTo('App\Rarity');
+    }
 }

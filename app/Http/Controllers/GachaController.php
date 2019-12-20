@@ -42,7 +42,7 @@ class GachaController extends Controller
         $result_total = [];
         
         // 10回引く
-        for($i = 1; $i <= 10; $i++){
+        for($i = 1; $i <= 9; $i++){
             
             $array = MyFunc::doGachaSingle();
             $result = $array['result'];
@@ -53,13 +53,16 @@ class GachaController extends Controller
         $pickup = $array['pickup'];
         $jackpot = $array['jackpot'];
         $hit = $array['hit'];
-        $result = null;
+        
         
         // 最低保証機能
         // ガチャ結果の配列$result_totalに「当たり」の単語があればtrueを返す
         if(preg_grep("/当たり/", $result_total)){
             
-            return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup]);
+            $array = MyFunc::doGachaSingle();
+            $result = $array['result'];
+            
+            $result_total[] = $result;
             
         }else{
             $gacha = mt_rand(1, 100);
@@ -75,6 +78,7 @@ class GachaController extends Controller
             $result_total[] = $result_add;
         }
         
+        $result = null;
         
         return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup]);
     }

@@ -12,8 +12,6 @@ class MyFunc
         $timestamp = time();
         $day = date('j', $timestamp);
         
-        //$miss = Prize::where('id', 1)->first();
-        
         // ピックアップ
         if($day % 2 == 0){
             $pickup = "今日は大当たりの中で、Aが出やすい日です";
@@ -38,7 +36,6 @@ class MyFunc
         $pickup = $array['pickup'];
         $jackpot = $array['jackpot'];
         $hit = $array['hit'];
-        //$miss = $array['miss'];
         
         // ガチャを実行
         $gacha = mt_rand(1, 100);
