@@ -69,17 +69,20 @@ class GachaController extends Controller
             
             if($gacha == 1){
                 $rand_key = array_rand($jackpot, 1);
-                $result_add = "大当たり  " . $jackpot[$rand_key];
+                $result = "大当たり  " . $jackpot[$rand_key];
             
             }else{
                 $rand_key = array_rand($hit, 1);
-                $result_add = "当たり " . $hit[$rand_key];
+                $result = "当たり " . $hit[$rand_key];
             }
-            $result_total[] = $result_add;
+            $result_total[] = $result;
         }
         
         $result = null;
         
-        return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup]);
+        // 配列$result_totalを5個ずつ分割する
+        $chunks = array_chunk($result_total, 5);
+        
+        return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup, 'chunks' => $chunks]);
     }
 }

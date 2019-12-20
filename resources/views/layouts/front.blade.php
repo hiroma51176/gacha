@@ -51,11 +51,15 @@
                                 {{-- ガチャの結果を表示する --}}
                                 <div class="result">
                                     <h2>結果</h2>
-                                    <ul style="list-style:none">
-                                        @foreach ($result_total as $result)
-                                            <li>{{ $result }}</li>
+                                    <table class="table table-dark">
+                                        @foreach ($chunks as $items)
+                                        <tr>
+                                            @foreach ($items as $item)
+                                                <td>{{ $item }}</td>
+                                            @endforeach
+                                        </tr>
                                         @endforeach
-                                    </ul>
+                                    </table>
                                 </div>
                             </div>
                         </div>
