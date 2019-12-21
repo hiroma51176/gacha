@@ -15,10 +15,12 @@ class GachaController extends Controller
     {
         $array = MyFunc::pickup();
         $pickup = $array['pickup'];
+        $jackpots = $array['jackpots'];
+        // \Debugbar::info($jackpot);
         
         $result = null;
         $result_total = null;
-        return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup]);
+        return view('layouts.front', ['result' => $result, 'result_total' => $result_total, 'pickup' => $pickup, 'jackpots' => $jackpots]);
     }
     
     
@@ -51,8 +53,8 @@ class GachaController extends Controller
         }
         
         $pickup = $array['pickup'];
-        $jackpot = $array['jackpot'];
-        $hit = $array['hit'];
+        $jackpots = $array['jackpots'];
+        $hits = $array['hits'];
         
         
         // 最低保証機能
@@ -68,12 +70,12 @@ class GachaController extends Controller
             $gacha = mt_rand(1, 100);
             
             if($gacha == 1){
-                $rand_key = array_rand($jackpot, 1);
-                $result = "大当たり  " . $jackpot[$rand_key];
+                $rand_key = array_rand($jackpots, 1);
+                $result = Rarity::find(3)->rarity_name . " - " . $jackpots[$rand_key]['prize_name'];
             
             }else{
-                $rand_key = array_rand($hit, 1);
-                $result = "当たり " . $hit[$rand_key];
+                $rand_key = array_rand($hits, 1);
+                $result = Rarity::find(2)->rarity_name . " - " . $hits[$rand_key]['prize_name'];
             }
             $result_total[] = $result;
         }

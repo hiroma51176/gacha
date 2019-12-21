@@ -14,6 +14,7 @@
                 <p>大当たり：１％　当たり：１９％　はずれ：８０％</p>
                 <p>最低保証：１回は当たり以上が出ます。</p>
                 <p>{{ "ピックアップ：" . $pickup }}</p>
+
                 {{-- ガチャを引く --}}
                 <div>
                     <a class="btn btn-primary" role="button" href="{{ action('GachaController@gachaSingle') }}">ガチャを１回引く</a>

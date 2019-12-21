@@ -44,7 +44,7 @@ class PrizeController extends Controller
         return redirect('admin/prize/index');
     }
     
-    // 登録してある景品の一覧を表示するアクション
+    // 登録してある景品とレアリティの一覧を表示するアクション
     public function index(Request $request)
     {
         $prizes = Prize::all();
@@ -66,7 +66,7 @@ class PrizeController extends Controller
         return view('admin.prize.edit', ['prize_form' => $prize]);
     }
     
-    // 更新を行うメソッド
+    // 景品の更新を行うメソッド
     public function update(Request $request)
     {
         $this->validate($request, Prize::$rules);

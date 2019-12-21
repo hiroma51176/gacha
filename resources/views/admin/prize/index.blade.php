@@ -19,6 +19,7 @@
                             <tr>
                                 <th width="10%">ID</th>
                                 <th width="20%">景品名</th>
+                                <th width="10%">レアリティID</th>
                                 <th width="20%">レアリティ</th>
                                 <th width="30%">画像</th>
                                 <th width="10%">操作</th>
@@ -30,10 +31,11 @@
                                 <tr>
                                     <th>{{ $prize->id }}</th>
                                     <td>{{ $prize->prize_name }} </td>
+                                    <th>{{ $prize->rarity_id }}</th>
                                     <td>{{ $prize->rarity->rarity_name }}</td>
                                     <td>
                                         @if ($prize->image_path)
-                                            <img src="{{ asset('storage/image/' . $prize->image_path) }}"alt="はずれの画像">
+                                            <img width="30%" src="{{ asset('storage/image/' . $prize->image_path) }}" alt="はずれの画像">
                                         @endif
                                     </td>
                                     <td>
