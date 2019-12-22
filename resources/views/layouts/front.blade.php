@@ -34,6 +34,9 @@
                                 <div class="result">
                                     <h2>結果</h2>
                                     <h2>{{ $result }}</h2>
+                                    @if ($result_image)
+                                        <img width="20%" src="{{ asset('storage/image/' . $result_image) }}" >
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -45,7 +48,7 @@
         {{-- 10連ガチャの場合 --}}
         @if (!is_null($result_total))
             <div class="row">
-                <div class="headline col-md-10 mx-auto">
+                <div class="headline col-md-12 mx-auto">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="caption mx-auto">
@@ -56,7 +59,12 @@
                                         @foreach ($chunks as $items)
                                         <tr>
                                             @foreach ($items as $item)
-                                                <td>{{ $item }}</td>
+                                                <td>
+                                                    <p>{{ $item[0] }}</p>
+                                                    @if($item[1])
+                                                    <p><img width="40%" src="{{ asset('storage/image/' . $item[1]) }}"></p>
+                                                    @endif
+                                                </td>
                                             @endforeach
                                         </tr>
                                         @endforeach

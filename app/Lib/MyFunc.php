@@ -7,11 +7,14 @@ use App\Rarity;
 
 class MyFunc
 {
-    // ピックアップを決めて、Modelからデータをを取り出す関数
+    // ピックアップを決めて、Modelからデータを取り出す関数
     public static function pickup()
     {
         $timestamp = time();
         $day = date('j', $timestamp);
+        
+        // はずれの中身
+        $miss = Prize::where('rarity_id', 1)->get()->toArray();
         
         // 当たりの中身
         // $hit = array('AA', 'BB', 'CC', 'DD', 'EE');
@@ -41,20 +44,20 @@ class MyFunc
 
         }
         
-        $array = array("pickup" => $pickup, "hits" => $hits, 'jackpots' => $jackpots);
+        $array = array("pickup" => $pickup,'miss' => $miss, "hits" => $hits, 'jackpots' => $jackpots);
         return $array;
     }
+    
     
     //ガチャを１回引く関数
     public static function doGachaSingle()
     {
-        // 大当たりの中身とピックアップ
+        // ピックアップと景品の中身取り出し
         $array = MyFunc::pickup();
         $pickup = $array['pickup'];
         $jackpots = $array['jackpots'];
         $hits = $array['hits'];
-        
-        //$miss = Prize::find(1);
+        $miss = $array['miss'];
         
         // ガチャを実行
         $gacha = mt_rand(1, 100);
@@ -64,19 +67,22 @@ class MyFunc
             $rand_key = array_rand($jackpots, 1);
             // $result = "大当たり  " . $jackpot[$rand_key];
             $result = Rarity::find(3)->rarity_name . " - " . $jackpots[$rand_key]['prize_name'];
+            $result_image = $jackpots[$rand_key]['image_path'];
             
         // 当たりの場合
         }elseif($gacha <= 20){
             $rand_key = array_rand($hits, 1);
             //$result = "当たり  " . $hit[$rand_key];
             $result = Rarity::find(2)->rarity_name . " - " . $hits[$rand_key]['prize_name'];
+            $result_image = $hits[$rand_key]['image_path'];
             
         //はずれの場合
         }else{
             //$result = "はずれ";
-            $result = Rarity::find(1)->rarity_name;
+            $result = Rarity::find(1)->rarity_name . " - " . $miss[0]['prize_name'];
+            $result_image = $miss[0]['image_path'];
         }
-        $array = array("result" => $result, "pickup" => $pickup, "jackpots" => $jackpots, "hits" =>$hits);
+        $array = array("result" => $result, "pickup" => $pickup, "jackpots" => $jackpots, "hits" =>$hits, "miss" => $miss, 'result_image' => $result_image);
         return $array;
     }
     
